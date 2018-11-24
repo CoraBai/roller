@@ -1,0 +1,10 @@
+"0","is.device(weird_die)"
+"1","[1]"
+"1"," TRUE"
+"1","
+"
+"0","loaded_die = device(sides = 1:6, prob = c(0.075, 0.1, 0.125, 0.15, 0.20, 0.35))"
+"0","loaded_die"
+"1","object ""device"" 
+
+"

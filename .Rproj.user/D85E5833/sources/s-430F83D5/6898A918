@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543057023744.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "50259949",
+    "id" : "6898A918",
+    "lastKnownWriteTime" : 1543096156,
+    "last_content_update" : 1543096156612,
+    "path" : "~/Desktop/133/roller/tests/testthat/test-roll.R",
+    "project_path" : "tests/testthat/test-roll.R",
+    "properties" : {
+        "cursorPosition" : "36,25",
+        "scrollLine" : "20"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543099159050.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4140859018",
+    "id" : "21E7C215",
+    "lastKnownWriteTime" : 1543099739,
+    "last_content_update" : 1543099739886,
+    "path" : "~/Desktop/133/roller/vignettes/introduction.Rmd",
+    "project_path" : "vignettes/introduction.Rmd",
+    "properties" : {
+        "cursorPosition" : "28,7",
+        "scrollLine" : "10"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

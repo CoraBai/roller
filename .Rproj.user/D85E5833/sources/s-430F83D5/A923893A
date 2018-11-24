@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543096519913.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A923893A",
+    "lastKnownWriteTime" : 1543096734,
+    "last_content_update" : 1543096734330,
+    "path" : "~/Desktop/133/roller/R/plot.R",
+    "project_path" : "R/plot.R",
+    "properties" : {
+        "cursorPosition" : "12,33",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

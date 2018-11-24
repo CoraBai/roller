@@ -1,0 +1,300 @@
+---
+title: "Workout3-Yitong-Bai"
+author: "Cora Bai"
+date: "11/21/2018"
+output: html_document
+---
+## 1) Object "device"
+```{r}
+#' @title check_sides
+#' @description check if sides of the object are non-duplicated positive number
+#' @param sides vector of object sides
+#' @return TRUE/FALSE if the sides are legit or not
+
+
+check_sides = function(sides){
+  if(length(sides)<= 1){
+     stop("'sides' must be a vector of length greater than 1")
+  }
+  if(any(duplicated(sides))== TRUE){
+    stop("'sides' cannot have duplicated elements")
+  }
+  TRUE
+}
+#' @title check_prob
+#' @description check if probability of the object is between 0 and 1, summed up to be 1
+#' @param prob probability of sides
+#' @return TRUE/FALSE if the probabilities are legit or not
+
+check_prob = function(prob){
+    if(!is.numeric(prob) | length(prob)<= 1){
+      stop("\n 'prob' must be a numeric vector of length 2")
+    } 
+    if(any(prob< 0) | any(prob> 1)){
+      stop("\n'prob' values must be between 0 and 1")
+    }
+    if(sum(prob)!= 1){
+      stop("\n elements in 'prob' must add up to 1")
+    }
+    TRUE
+}
+#' @title is.device
+#' @description check if the class of input is device
+#' @param x input object
+#' @return TRUE/FALSE if the input are objects or not
+
+is.device = function(x){
+  if(class(x) == "device"){
+  return(TRUE)
+  }
+  else
+    return(FALSE)
+}
+
+#' @title print.device
+#' @description print device information in an organized manner
+#' @param res input device
+#' @return print sides and probability of device
+
+print.device = function(res) {
+  cd = data.frame(sides = res$sides, prob = res$prob)
+  cat('object "device" \n\n')
+  print(cd)
+  invisible(res)
+}
+
+#constuctor function
+#' @title device
+#' @description return information of device
+#' @param sides sides info of the object
+#' @param prob prob info of the object
+#' @return device information, including sides and probabilities
+#' @export
+
+device = function(sides = c(1,2), prob = c(0.5, 0.5)){
+  if(length(sides) != length(prob)){
+    stop("'sides' and 'prob' have different lengths")
+  }
+  if(check_prob(prob) == TRUE && check_sides(sides) == TRUE){
+    res = list(sides = sides, prob = prob)
+    class(res) = "device"
+    return(res)
+    
+  }
+}
+
+fair_coin = device()
+fair_coin
+
+weird_die = device(sides = c('i', 'ii', 'iii', 'iv'), prob = rep(1/4, 4))
+weird_die
+is.device(weird_die)
+
+loaded_die = device(sides = 1:6, prob = c(0.075, 0.1, 0.125, 0.15, 0.20, 0.35))
+loaded_die
+is.device(loaded_die)
+
+#invalid_device = device(sides = c('a'))
+#bad_coin = device(sides = c('heads', 'heads'))
+#bad_example = device(sides = c('a', 'b', 'c'), prob = c(0.2, 0.8))
+is.device(c(1, 2, 3))
+```
+
+
+## 2) Object "rolls"
+```{r}
+#check_times
+#' @title check_times
+#' @description check if time is positive integer larger or equal to 1
+#' @param times input time
+#' @return TRUE/FALSE of if time is qualified
+
+check_times = function(times){
+  if(times <1 | times%%1 != 0){
+    stop("'times' need to be a positive integer greater than or equal to 1")
+  }
+  TRUE
+}
+
+#' @title rolls
+#' @description print rollss information in an organized manner
+#' @param list input roll list
+#' @return print rolls info in an organized manner
+
+print.rolls = function(list){
+  cat('object "rolls" \n\n')
+  print(list$rolls)
+  invisible(list)
+}
+
+#' @title roll
+#' @description return information of the roll
+#' @param sides sides info of the object
+#' @param prob prob info of the object
+#' @return device information, including sides and probabilities
+#' @export
+
+roll = function(dev, times = 1){
+  if(class(dev) != "device"){
+    stop("The class is not 'device'")
+  }
+  if (check_times(times)== TRUE) {
+    rolls_sample = sample(dev$sides, size = times, replace = TRUE, prob = dev$prob)
+    lst = list(rolls = rolls_sample, sides = dev$sides, prob = dev$prob, total = times)
+    class(lst) = "rolls"
+  }
+  return (lst)
+}
+fair_die = device(sides = 1:6, prob = rep(1/6, 6))
+set.seed(123)
+fair_50rolls = roll(fair_die, times = 50)
+fair_50rolls
+
+fair_die_two = device()
+set.seed(123)
+fair50 = roll(fair_die_two, times = 50)
+names(fair50)
+fair50$rolls
+fair50$sides
+fair50$prob
+fair50$total
+#string die
+str_die = device(sides = c('a', 'b', 'c', 'd', 'e', 'f'), prob = c(0.075, 0.1, 0.125, 0.15, 0.20, 0.35))
+set.seed(123)
+str_rolls = roll(str_die, times = 20)
+names(str_rolls)
+str_rolls
+```
+
+## 3) Summary method for object "rolls"
+```{r}
+#' @title summary
+#' @description return summary of the roll
+#' @param roll roll outcomes of input device
+#' @return side, count, probability summary of the input roll
+
+summary.rolls = function(roll) {
+  side = roll$sides
+  counts = c()
+  prop = c()
+  for(i in 1:length(side)) {
+    temp_count = sum(roll$rolls == side[i])
+    counts = c(counts, temp_count)
+  }
+  prop = counts / roll$total
+  freqs = data.frame(side = side, count = counts, prop = prop)
+  list = list(freqs = freqs)
+  class(list) = "summary.rolls"
+  return (list)
+}
+print.summary.rolls = function(list) {
+  cat('summary "rolls"\n\n')
+  print(list$freqs)
+}
+set.seed(123)
+fair_50rolls <- roll(fair_die, times = 50)
+fair50_sum <- summary(fair_50rolls)
+fair50_sum
+class(fair50_sum)
+names(fair50_sum)
+fair50_sum$freqs
+```
+
+```{r}
+library("ggplot2")
+```
+
+## 4) Plot Method for object "rolls"
+```{r}
+#' @title plot.rolls
+#' @description plot input roll and times in bar chart
+#' @param roll roll outcomes of input device
+#' @param times total times of rolls
+#' @return side, count, probability summary of the input roll
+
+plot.rolls = function(roll, times){
+  sum = summary(roll)
+  df = sum$freqs
+  ggplot(df, aes(x = df$side, y = df$prop))+
+    geom_bar(stat = "identity", col = "grey")+
+    ylab("relative frequencies")+
+    xlab("sides of device")+
+    ggtitle(paste0("Relative Frequencies in a series of ",roll$total, " rolls"))
+}
+plot(fair_50rolls)
+```
+
+## 5) Additional Methods
+```{r}
+#' @title make_rolls
+#' @description amend changes in parameters of rolls
+#' @param roll a list of roll information
+#' @param rolls roll outcomes
+#' @return amended side, count, probability summary of the input roll
+make_rolls = function(roll, rolls){
+  res = list(rolls = rolls, 
+             sides = roll$sides, 
+             prob = roll$prob, 
+             total = length(rolls))
+    class(res) = "rolls"
+    res
+}
+set.seed(123)
+fair_dev <- device(sides = letters[1:8], prob = rep(1/8, 8)) 
+fair500 <- roll(fair_dev, times = 500)
+
+summary.rolls(fair500)
+
+#extraction method
+#' @title [.rolls
+#' @description extract elements
+#' @param roll roll outcomes of input device
+#' @param i index of numbers being extracted
+#' @return extracted number
+
+"[.rolls" = function(roll, i){
+  roll$rolls[i]
+}
+fair500[500]
+
+
+#replacement method
+#' @title [<- rolls
+#' @description replacement method
+#' @param x roll outcomes of input device
+#' @param i index of element being changed
+#' @param value value of element in replacement
+#' @return new roll information
+
+"[<-.rolls" = function(x, i, value){
+  x$rolls[i] = value
+  make_rolls(x, x$rolls)
+}
+fair500[500] <- 'a'
+fair500[500]
+summary.rolls(fair500)
+
+#addition method
+#' @title +. rolls
+#' @description addition method
+#' @param roll roll outcomes of input device
+#' @param incr increase of roll times
+#' @return new roll information
+
+"+.rolls" = function(roll, incr){
+  if(length(incr)!= 1 | incr <=0){
+    stop("\ninvalid addition")
+  }
+  dev = device(roll$sides, roll$prob)
+  more_rolls = roll(dev, times = incr)
+  make_rolls(roll, c(roll$rolls, more_rolls$rolls))
+}
+fair600 <- fair500 + 100
+summary(fair600)
+#plot method
+plot(fair500, 500)
+```
+
+
+
+

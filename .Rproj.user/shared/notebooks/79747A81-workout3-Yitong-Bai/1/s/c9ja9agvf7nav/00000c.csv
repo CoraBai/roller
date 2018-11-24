@@ -1,0 +1,5 @@
+"0","weird_die = device(sides = c('i', 'ii', 'iii', 'iv'), prob = rep(1/4, 4))"
+"0","weird_die"
+"1","object ""device"" 
+
+"

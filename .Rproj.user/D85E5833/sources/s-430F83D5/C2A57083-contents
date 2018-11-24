@@ -1,0 +1,11 @@
+Package: roller
+Type: Package
+Title: Simulates rolling an object
+Version: 0.1.0
+Author: Yitong Bai
+Maintainer: Yitong Bai <baiyt.cora2021@berkeley.edu>
+Description: The purpose of the package is to simulate rolling an object for multiple times and visualize the outcomes in different graphs.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr

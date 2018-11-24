@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543096497648.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1039093421",
+    "id" : "2395C009",
+    "lastKnownWriteTime" : 1543096664,
+    "last_content_update" : 1543096664446,
+    "path" : "~/Desktop/133/roller/R/summary.rolls.R",
+    "project_path" : "R/summary.rolls.R",
+    "properties" : {
+        "cursorPosition" : "7,14",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
